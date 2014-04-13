@@ -42,4 +42,20 @@ describe "Static Pages" do
     it_should_behave_like "all static pages"
   end
 
+  def test_link(link,title)
+    visit root_path
+    click_link link
+    expect(page).to have_title(full_title(title))
+  end
+  it "should have the right links on the layout" do
+   test_link("About","About Us")
+   test_link("Help","Help")
+   test_link("Contact","Contact")
+   test_link("Home","")
+   test_link("Sign up now!","Sign up")
+   test_link("sample app","")
+  end
+
+
+
 end
