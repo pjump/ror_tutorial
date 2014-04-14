@@ -41,21 +41,25 @@ describe "Static Pages" do
     let(:page_title) { 'Contact' }
     it_should_behave_like "all static pages"
   end
+  describe "Layout links" do
 
-  def test_link(link,title)
-    visit root_path
-    click_link link
-    expect(page).to have_title(full_title(title))
+    link_and_title_pairs = [["About", "About Us"],
+     ["Help", "Help"],
+      ["Contact","Contact"],
+      ["Home",""],
+      ["Sign up now!","Sign up"],
+      ["sample app",""]
+    ]
+    link_and_title_pairs.each do |pair|
+      link=pair.first
+      title=pair.second
+      specify "link '#{link}' should point to a page subtitled '#{title}'" do
+        visit root_path
+        click_link link
+        expect(page).to have_title(full_title(title))
+      end
+
+    end
   end
-  it "should have the right links on the layout" do
-   test_link("About","About Us")
-   test_link("Help","Help")
-   test_link("Contact","Contact")
-   test_link("Home","")
-   test_link("Sign up now!","Sign up")
-   test_link("sample app","")
-  end
-
-
 
 end
